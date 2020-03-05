@@ -43,14 +43,12 @@ class AlarmClock {
     start() {
         let time = this.getCurrentFormattedTime();
         let checkClock = alarm => {
-            this.alarmCollection.forEach(alarm => {
             if (alarm.time === time) {
                 return alarm.callback();
             }
-        });
          };
            if (this.timerId === null) {  
-               let interval = this.alarmCollection.forEach(alarm => checkClock(alarm));
+               let interval = () => this.alarmCollection.forEach(alarm => checkClock(alarm));
                return this.timerId = setInterval(interval, 5000);
         };
     }
@@ -74,19 +72,20 @@ class AlarmClock {
 
 function testCase() {
     let alarm1 = new AlarmClock();
-    alarm1.addClock('18:24', () => console.log("Вставай!"), 1)
+    alarm1.addClock('16:13', () => console.log("Вставай!"), 1)
 
-    alarm1.addClock('18:12', () => {console.log("Поднимайся!"), this.removeClock(2)}, 2);
+    alarm1.addClock('16:14', () => {console.log("Поднимайся!"), this.removeClock(2)}, 2);
 
-    alarm1.addClock('18:13', () => {console.log("Поднимайся уже!"), this.printAlarms(), this.stop()}, 3)
+    alarm1.addClock('16:16', () => {console.log("Поднимайся уже!"), this.printAlarms(), this.stop()}, 3)
 
     alarm1.printAlarms();
 
     console.log(alarm1.getCurrentFormattedTime())
     
+    alarm1.start();
 
 };
 
 testCase();
     
-    
+
